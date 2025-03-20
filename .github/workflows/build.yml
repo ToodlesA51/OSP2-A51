@@ -44,7 +44,6 @@ jobs:
         run: |
           mkdir dist && cd dist
           mv ../linux-qvm/*.pk3 .
-          mv ../linux-qvm/*.cksum .
 
       - name: Create latest build
         uses: marvinpinto/action-automatic-releases@latest
