@@ -1,0 +1,59 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  linux-qvm:
+    name: linux-qvm
+    runs-on: ubuntu-22.04
+    steps:
+
+    - name: Install tools
+      run: |
+        sudo apt-get -qq update
+        sudo apt-get -y install git ruby
+
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Build
+      run: |
+        sudo git config --system --add safe.directory '*'
+        cd build/linux-qvm
+        make dirs
+        make -j 8 vm/cgame.qvm
+        7z u -tzip -mx=9 -mpass=8 -mfb=255 -- zzz-a51-osp2.pk3 vm/cgame.qvm ../../assets/*
+        ruby checksum.rb zzz-a51-osp2.pk3 > zzz-a51-osp2.pk3.cksum
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: linux-qvm
+        path: |
+          build/linux-qvm/zzz-a51-osp2.pk3
+          build/linux-qvm/zzz-a51-osp2.pk3.cksum
+        if-no-files-found: error
+        retention-days: 5
+
+  create-testing:
+    needs: [linux-qvm]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Prepare files
+        run: |
+          mkdir dist && cd dist
+          mv ../linux-qvm/*.pk3 .
+          mv ../linux-qvm/*.cksum .
+
+      - name: Create latest build
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: Latest Build
+          files: |
+            dist/*

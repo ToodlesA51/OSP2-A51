@@ -1,4 +1,4 @@
-# OSP2
+# OSP2-A51
 
 This Quake 3 mod is an attempt to recover old OSP mod source codes and improve it.
 
@@ -6,11 +6,24 @@ Based on vanilla Q3 and OSP files analysis.
 
 Also used code from :
 
+ - OSP2 from snems: https://github.com/snems/OSP2 
  - baseq3a from Cyrax: https://github.com/ec-/baseq3a
  - XQ3E: https://github.com/xq3e/engine, 
  - unlagged mod written by Nail Toronto 
  - Ratmod https://github.com/rdntcntrl/ratoa_gamecode
 
+# A51 Changes
+
+- Included English translated documentation.
+
+# Known Issues
+
+- ch_pickupitem - pickup string is not displaying when classic OSP1 hud is used.
+- (FFA & Tourney) - scores are on top of lagometer when using Q3Comp Style status bars.
+- ch_drawflagnames > 0 - scores are in the incorrect postion when using Q3Comp Style status bars.
+- ch_drawflagnames - displays some name incorrectly.
+- ch_crosshairnamesleft - bleeds into ammo numbers on some classic osp statusbars.
+- OSP left sliding window MOTD's not display correctly on some servers.
 
 # Features
 
