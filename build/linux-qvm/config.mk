@@ -1,4 +1,4 @@
-PK3 = zz-osp-pak8.pk3
+PK3 = zzz-a51-osp2.pk3
 
 basedir = ../../code
 
