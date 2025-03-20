@@ -24,14 +24,12 @@ jobs:
         make dirs
         make -j 8 vm/cgame.qvm
         7z u -tzip -mx=9 -mpass=8 -mfb=255 -- zzz-a51-osp2.pk3 vm/cgame.qvm ../../assets/*
-        ruby checksum.rb zzz-a51-osp2.pk3 > zzz-a51-osp2.pk3.cksum
 
     - uses: actions/upload-artifact@v4
       with:
         name: linux-qvm
         path: |
           build/linux-qvm/zzz-a51-osp2.pk3
-          build/linux-qvm/zzz-a51-osp2.pk3.cksum
         if-no-files-found: error
         retention-days: 5
 
