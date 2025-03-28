@@ -15,6 +15,7 @@ Also used code from :
 # A51 Changes
 
 - Included English translated documentation.
+- Fixed Grapple hook textures supplied by Kr3m
 
 # Known Issues
 
